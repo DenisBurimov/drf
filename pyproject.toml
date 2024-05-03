@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "d3"
+version = "0.1.0"
+description = "REST API"
+authors = ["Denys <denysburimov@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+django = "^5.0.4"
+djangorestframework = "^3.15.1"
+pytest = "^8.2.0"
+pytest-django = "^4.8.0"
+django-environ = "^0.11.2"
+
+[tool.pytest.ini_options]
+testpaths = "tests"
+DJANGO_SETTINGS_MODULE = "d3.settings"
+python_files = "test_*.py"
