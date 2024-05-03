@@ -11,7 +11,8 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWD:-secret}
     ports:
       - 127.0.0.1:${DB_PORT:-5432}:5432
-  web:
+
+  api:
     build: .
     restart: unless-stopped
     env_file:
