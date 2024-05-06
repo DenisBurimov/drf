@@ -2,21 +2,23 @@ import pytest
 from rest_framework.test import APIClient
 from rest_framework.response import Response
 from users.models import D3User
+from users.serializers import UserSerializer
+
+
+@pytest.mark.django_db
+def test_get_all_users(client: APIClient):
+    response: Response = client.get("/users/")
+    assert response.status_code == 200
+    assert len(response.data) == D3User.objects.count()
+    assert UserSerializer(response.data[0])
 
 
 @pytest.mark.django_db
 def test_get_user(client: APIClient):
-    TEST_USER_PHONE_NUMBER = "1234567890"
-    TEST_USER_PASSWORD = "password"
-    D3User.objects.create(
-        phone_number=TEST_USER_PHONE_NUMBER,
-        password=TEST_USER_PASSWORD,
-    )
-
     test_user = D3User.objects.first()
 
-    assert test_user.phone_number == TEST_USER_PHONE_NUMBER
+    assert test_user.phone_number == test_user.phone_number
 
-    response: Response = client.get(f"/users/{TEST_USER_PHONE_NUMBER}")
+    response: Response = client.get(f"/users/{test_user.phone_number}")
     assert response.status_code == 200
-    assert response.data["phone_number"] == TEST_USER_PHONE_NUMBER
+    assert response.data["phone_number"] == test_user.phone_number

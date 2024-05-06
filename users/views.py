@@ -5,6 +5,13 @@ from .serializers import UserSerializer
 
 
 @api_view(["GET"])
+def get_all_users(request):
+    users = D3User.objects.all()
+    serializer = UserSerializer(users, many=True)
+    return Response(serializer.data)
+
+
+@api_view(["GET"])
 def get_user(request, phone_number: str):
     user = D3User.objects.get(phone_number=phone_number)
     serializer = UserSerializer(user)
