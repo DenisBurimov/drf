@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, Group
-from .managers import UserManager
+from users.managers import UserManager
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
@@ -48,9 +48,3 @@ class D3User(AbstractBaseUser, PermissionsMixin):
     class Meta:
         verbose_name = "D3User"
         verbose_name_plural = "D3Users"
-
-
-# Create your models here.
-class Profile(models.Model):
-    user = models.OneToOneField(D3User, on_delete=models.CASCADE)
-    description = models.TextField(max_length=500, blank=True)
