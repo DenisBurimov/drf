@@ -28,9 +28,15 @@ def test_get_user(client: APIClient):
 def test_create_user(client: APIClient):
     TEST_PHONE_NUMBER = "1234567890"
     TEST_PASSWORD = "12345"
+    TEST_FIRST_NAME = "John"
+    TEST_LAST_NAME = "Doe"
+    TEST_DESCRIPTION = "Test description"
     user_data = dict(
         phone_number=TEST_PHONE_NUMBER,
         password=TEST_PASSWORD,
+        first_name=TEST_FIRST_NAME,
+        last_name=TEST_LAST_NAME,
+        description=TEST_DESCRIPTION,
     )
 
     response: Response = client.post("/users/create", user_data, format="json")

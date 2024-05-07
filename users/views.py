@@ -3,7 +3,8 @@ from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .models.user import D3User
-from .serializers import UserSerializer
+from .serializers import UserSerializer, UserCreateSerializer
+from users.managers.profile import UserProfileManager
 
 
 @api_view(["GET"])
@@ -20,16 +21,22 @@ def get_user(request, phone_number: str):
     return Response(serializer.data)
 
 
-# @api_view(["POST"])
-# def create_user(request):
-#     serializer = UserSerializer(data=request.data)
-#     if serializer.is_valid():
-#         serializer.save()
-#         return Response(serializer.data, status=201)
-#     return Response(serializer.errors, status=400)
+@api_view(["POST"])
+def create_user(request):
+    serializer = UserCreateSerializer(data=request.data)
+    if serializer.is_valid():
+        # serializer.save()
+        user, profile = UserProfileManager().create_user_with_profile(
+            phone=serializer.data["phone_number"],
+            password=serializer.data["password"],
+            first_name=serializer.data["first_name"],
+            last_name=serializer.data["last_name"],
+            description=serializer.data["description"],
+        )
+        return Response(serializer.data, status=201)
+    return Response(serializer.errors, status=400)
 
 
-class UserCreate(generics.CreateAPIView):
-    # permission_classes = [AllowAny]
-    queryset = D3User.objects.all()
-    serializer_class = UserSerializer
+# class UserCreate(generics.CreateAPIView):
+#     queryset = D3User.objects.all()
+#     serializer_class = UserSerializer

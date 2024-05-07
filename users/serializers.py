@@ -12,6 +12,9 @@ class UserSerializer(serializers.ModelSerializer):
 class UserCreateSerializer(serializers.Serializer):
     phone_number = serializers.CharField()
     password = serializers.CharField()
+    first_name = serializers.CharField(max_length=32, required=False)
+    last_name = serializers.CharField(max_length=32, required=False)
+    description = serializers.CharField(max_length=256, required=False)
 
-    def create(self, validated_data):
-        return D3User.objects.create(**validated_data)
+    # def create(self, validated_data):
+    #     return D3User.objects.create(**validated_data)
