@@ -1,2 +1,2 @@
-from .user import D3User, GroupProxy
+from .user import User, GroupProxy
 from .profile import Profile

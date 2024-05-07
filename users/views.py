@@ -2,21 +2,21 @@ from rest_framework.permissions import AllowAny
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .models.user import D3User
+from .models.user import User
 from .serializers import UserSerializer, UserCreateSerializer
 from users.managers.profile import UserProfileManager
 
 
 @api_view(["GET"])
 def get_all_users(request):
-    users = D3User.objects.all()
+    users = User.objects.all()
     serializer = UserSerializer(users, many=True)
     return Response(serializer.data)
 
 
 @api_view(["GET"])
 def get_user(request, phone_number: str):
-    user = D3User.objects.get(phone_number=phone_number)
+    user = User.objects.get(phone_number=phone_number)
     serializer = UserSerializer(user)
     return Response(serializer.data)
 
@@ -38,5 +38,5 @@ def create_user(request):
 
 
 # class UserCreate(generics.CreateAPIView):
-#     queryset = D3User.objects.all()
+#     queryset = User.objects.all()
 #     serializer_class = UserSerializer

@@ -11,9 +11,10 @@ class GroupProxy(Group):
         app_label = "users"
 
 
-class D3User(AbstractBaseUser, PermissionsMixin):
+class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
     phone_number = models.CharField(max_length=15, unique=True)
+    email = models.EmailField(max_length=255, blank=True, null=True)
     USERNAME_FIELD = "phone_number"
 
     is_staff = models.BooleanField(
@@ -46,5 +47,5 @@ class D3User(AbstractBaseUser, PermissionsMixin):
         return self.phone_number
 
     class Meta:
-        verbose_name = "D3User"
-        verbose_name_plural = "D3Users"
+        verbose_name = "User"
+        verbose_name_plural = "Users"
