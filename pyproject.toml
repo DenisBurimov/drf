@@ -14,9 +14,12 @@ django-environ = "^0.11.2"
 psycopg2 = "^2.9.9"
 faker = "^25.0.1"
 django-extensions = "^3.2.3"
+pytest-env = "^1.1.3"
 
 [tool.pytest.ini_options]
 testpaths = "tests"
 DJANGO_SETTINGS_MODULE = "d3.settings"
-APP_ENV = "testing"
 python_files = "test_*.py"
+
+[tool.pytest_env]
+APP_ENV = "testing"
