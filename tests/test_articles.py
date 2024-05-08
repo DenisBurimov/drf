@@ -67,12 +67,6 @@ def test_update_article(client: APIClient):
         "users_liked": [likers[0].id],
     }
 
-    # for i in range(TEST_LIKERS_NUMBER):
-    #     response: Response = client.put(f"/articles/update/{article.uuid}", likes_data)
-    #     assert response.status_code == 200
-    #     assert likers[i].id in response.data["users_liked"]
-    # assert article.users_liked.count() == TEST_LIKERS_NUMBER
-
     response: Response = client.put(f"/articles/update/{article.uuid}", likes_data)
     assert response.status_code == 200
     assert response.data["users_liked"] == [likers[0].id]
