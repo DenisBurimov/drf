@@ -1,6 +1,7 @@
 import random
 from faker import Faker
 from users.models import User, Profile
+from articles.models import Article
 
 
 faker = Faker()
@@ -17,10 +18,15 @@ def fill_db(users_number: int = TEST_USERS_NUMBER):
         )
         first_name = faker.first_name()
         last_name = faker.last_name()
-        Profile.objects.create(
+        profile = Profile.objects.create(
             user=user,
             first_name=first_name,
             last_name=last_name,
             description=f"Profile {user.phone_number} - {first_name} {last_name}",
+        )
+        Article.objects.create(
+            author=profile,
+            title=faker.text(max_nb_chars=50),
+            content=faker.text(max_nb_chars=500),
         )
     print(f"Filled database with {users_number} users.")

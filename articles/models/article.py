@@ -12,4 +12,4 @@ class Article(models.Model):
     users_liked = models.ManyToManyField(Profile, related_name="articles_liked")
 
     def __str__(self):
-        return f"{self.title} by {self.author.phone_number}"
+        return f"{self.title} by {self.author.first_name} {self.author.last_name}"
