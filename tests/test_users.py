@@ -5,6 +5,13 @@ from users.models import User
 from users.serializers import UserSerializer
 
 
+TEST_PHONE_NUMBER = "1234567890"
+TEST_PASSWORD = "12345"
+TEST_FIRST_NAME = "John"
+TEST_LAST_NAME = "Doe"
+TEST_DESCRIPTION = "Test description"
+
+
 @pytest.mark.django_db
 def test_get_all_users(client: APIClient):
     response: Response = client.get("/users/")
@@ -26,11 +33,6 @@ def test_get_user(client: APIClient):
 
 @pytest.mark.django_db
 def test_create_user(client: APIClient):
-    TEST_PHONE_NUMBER = "1234567890"
-    TEST_PASSWORD = "12345"
-    TEST_FIRST_NAME = "John"
-    TEST_LAST_NAME = "Doe"
-    TEST_DESCRIPTION = "Test description"
     user_data = dict(
         phone_number=TEST_PHONE_NUMBER,
         password=TEST_PASSWORD,
@@ -45,3 +47,29 @@ def test_create_user(client: APIClient):
     new_user = User.objects.get(phone_number=user_data["phone_number"])
     assert new_user.phone_number == user_data["phone_number"]
     assert new_user.password == user_data["password"]
+
+
+@pytest.mark.django_db
+def test_update_user(client: APIClient):
+    test_user = User.objects.first()
+    new_data = dict(
+        phone_number=TEST_PHONE_NUMBER,
+        password=TEST_PASSWORD,
+        first_name=TEST_FIRST_NAME,
+        last_name=TEST_LAST_NAME,
+        description=TEST_DESCRIPTION,
+    )
+
+    response: Response = client.put(
+        f"/users/update/{test_user.phone_number}",
+        new_data,
+        format="json",
+    )
+    assert response.status_code == 200
+
+    updated_user = User.objects.get(phone_number=new_data["phone_number"])
+    assert updated_user.phone_number == new_data["phone_number"]
+    assert updated_user.password == new_data["password"]
+    assert updated_user.profile.first_name == new_data["first_name"]
+    assert updated_user.profile.last_name == new_data["last_name"]
+    assert updated_user.profile.description == new_data["description"]

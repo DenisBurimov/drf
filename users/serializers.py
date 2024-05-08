@@ -9,7 +9,7 @@ class UserSerializer(serializers.ModelSerializer):
         extra_kwargs = {"password": {"write_only": True}}
 
 
-class UserCreateSerializer(serializers.Serializer):
+class UserProfileSerializer(serializers.Serializer):
     phone_number = serializers.CharField()
     password = serializers.CharField()
     first_name = serializers.CharField(max_length=32, required=False)
