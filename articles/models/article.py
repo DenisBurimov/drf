@@ -1,8 +1,10 @@
 from django.db import models
 from users.models.profile import Profile
+from uuid import uuid4
 
 
 class Article(models.Model):
+    uuid = models.UUIDField(editable=False, default=uuid4)
     title = models.CharField(max_length=128)
     content = models.TextField(max_length=2048)
     author = models.ForeignKey(Profile, on_delete=models.CASCADE)
