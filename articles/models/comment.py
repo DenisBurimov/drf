@@ -17,7 +17,7 @@ class Comment(models.Model):
         related_name="answers",
         null=True,
     )
-    user = models.ForeignKey(
+    author = models.ForeignKey(
         Profile,
         on_delete=models.CASCADE,
         related_name="comments",
@@ -27,4 +27,4 @@ class Comment(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.uuid}: {self.article.title} by {self.user.first_name} {self.user.last_name}"
+        return f"{self.uuid}: {self.article.title} by {self.author.first_name} {self.author.last_name}"
