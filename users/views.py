@@ -38,7 +38,6 @@ def create_user(request):
             "User data is serialized successfully. Creating user: [%s]",
             serializer.data["phone_number"],
         )
-        # serializer.save()
         user, profile = users_manager.post(
             phone=serializer.data["phone_number"],
             password=serializer.data["password"],
@@ -46,8 +45,14 @@ def create_user(request):
             last_name=serializer.data["last_name"],
             description=serializer.data["description"],
         )
-        assert user
-        assert profile
+        if not user:
+            log(log.ERROR, "Failed to create user")
+            return Response("Failed to create user", status=400)
+
+        if not profile:
+            log(log.ERROR, "Failed to create profile")
+            return Response("Failed to create profile", status=400)
+
         log(log.INFO, "User [%s] created successfully", user.phone_number)
         return Response(serializer.data, status=201)
 

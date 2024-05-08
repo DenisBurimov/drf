@@ -20,7 +20,7 @@ class ArticleGetSerializer(ArticleBaseSerializer):
     )
 
 
-class ArticleUpdateSerializer(ArticleGetSerializer):
+class ArticleUpdateSerializer(ArticleBaseSerializer):
     users_liked = serializers.PrimaryKeyRelatedField(
         queryset=Profile.objects.all(),
         required=False,

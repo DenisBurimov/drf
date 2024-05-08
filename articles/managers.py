@@ -50,7 +50,11 @@ class ArticleManager:
             # article.title = data.get("title", article.title)
             # article.content = data.get("content", article.content)
             for attr, value in data.items():
-                setattr(article, attr, value)
+                if attr == "users_liked":
+                    article.users_liked.add(value)
+                    article.save()
+                else:
+                    setattr(article, attr, value)
             article.save()
         except Exception as e:
             log(log.ERROR, "Failed to update article [%s]: %s", article.uuid, str(e))

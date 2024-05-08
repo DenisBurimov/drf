@@ -3,7 +3,11 @@ from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .models.article import Article
-from .serializers import ArticleBaseSerializer, ArticleGetSerializer
+from .serializers import (
+    ArticleBaseSerializer,
+    ArticleGetSerializer,
+    ArticleUpdateSerializer,
+)
 from .managers import ArticleManager
 from d3.logger import log
 
@@ -53,7 +57,7 @@ def update_article(request, uuid):
         log(log.ERROR, "Failed to update article [%s]: article does not exist", uuid)
         return Response({"error": "Article does not exist"}, status=404)
 
-    serializer = ArticleBaseSerializer(article, data=request.data, partial=True)
+    serializer = ArticleUpdateSerializer(article, data=request.data, partial=True)
     if serializer.is_valid():
         log(log.INFO, "Updating article [%s]", uuid)
         is_updated, error_message = article_manager.put(

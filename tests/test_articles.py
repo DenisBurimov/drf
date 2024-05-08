@@ -1,6 +1,7 @@
 import pytest
 from rest_framework.test import APIClient
 from rest_framework.response import Response
+from users.models import Profile
 from articles.models import Article
 from articles.serializers import ArticleBaseSerializer
 
@@ -54,3 +55,32 @@ def test_update_article(client: APIClient):
     assert response.data["author"] == article.author_id
     assert Article.objects.get(uuid=article.uuid).title == article_data["title"]
     assert Article.objects.get(uuid=article.uuid).content == article_data["content"]
+
+    TEST_LIKERS_NUMBER = 2
+    likers = Profile.objects.exclude(id=1).order_by("?")[:TEST_LIKERS_NUMBER]
+
+    for liker in likers:
+        assert liker.id != article.author_id
+    assert len(likers) == TEST_LIKERS_NUMBER
+
+    likes_data = {
+        "users_liked": [likers[0].id],
+    }
+
+    # for i in range(TEST_LIKERS_NUMBER):
+    #     response: Response = client.put(f"/articles/update/{article.uuid}", likes_data)
+    #     assert response.status_code == 200
+    #     assert likers[i].id in response.data["users_liked"]
+    # assert article.users_liked.count() == TEST_LIKERS_NUMBER
+
+    response: Response = client.put(f"/articles/update/{article.uuid}", likes_data)
+    assert response.status_code == 200
+    assert response.data["users_liked"] == [likers[0].id]
+    assert article.users_liked.count() == 1
+
+    likers_data = {
+        "users_liked": [likers[1].id],
+    }
+    response: Response = client.put(f"/articles/update/{article.uuid}", likers_data)
+    assert response.status_code == 200
+    assert article.users_liked.count() == 2
