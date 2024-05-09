@@ -1,12 +1,7 @@
-from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from django.shortcuts import render
+from articles.models import Article
 
 
-@api_view(["GET"])
 def main_info(request):
-    person = {
-        "name": "John",
-        "age": 30,
-        "city": "New York",
-    }
-    return Response(person)
+    articles = Article.objects.all()
+    return render(request, "d3/main_info.html", {"articles": articles})
