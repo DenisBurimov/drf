@@ -1,14 +1,12 @@
-from rest_framework.permissions import AllowAny
-from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .models.article import Article
-from .serializers import (
+from articles.models.article import Article
+from articles.serializers import (
     ArticleBaseSerializer,
     ArticleGetSerializer,
     ArticleUpdateSerializer,
 )
-from .managers import ArticleManager
+from articles.managers import ArticleManager
 from d3.logger import log
 
 
