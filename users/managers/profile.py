@@ -1,6 +1,6 @@
 from users.models import User, Profile
 from users.serializers import UserSerializer
-from d3.logger import log
+from main.logger import log
 
 
 class UsersProfilesManager:

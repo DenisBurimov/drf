@@ -24,4 +24,4 @@ RUN python manage.py migrate
 EXPOSE 8000
 
 # Define the command to run the application
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "d3.wsgi:application"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "main.wsgi:application"]

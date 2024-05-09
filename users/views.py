@@ -5,7 +5,7 @@ from rest_framework.decorators import api_view
 from .models.user import User
 from .serializers import UserSerializer, UserProfileSerializer
 from users.managers.profile import UsersProfilesManager
-from d3.logger import log
+from main.logger import log
 
 
 users_manager = UsersProfilesManager()

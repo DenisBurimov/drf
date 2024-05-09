@@ -1,6 +1,6 @@
 from articles.models import Article, Comment
 from users.models import Profile
-from d3.logger import log
+from main.logger import log
 
 
 class CommentManager:

@@ -7,7 +7,7 @@ from articles.serializers import (
     ArticleUpdateSerializer,
 )
 from articles.managers import ArticleManager
-from d3.logger import log
+from main.logger import log
 
 
 article_manager = ArticleManager()

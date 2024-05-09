@@ -6,3 +6,9 @@
 - pytest
 - API
 - templates with tailwind CSS
+
+## For running Tailwind server with constant reload:
+
+```
+python manage.py tailwind start
+```
