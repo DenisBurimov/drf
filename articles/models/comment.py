@@ -1,10 +1,9 @@
 from django.db import models
-from users.models.profile import Profile
+from users.models import BaseModel, Profile
 from uuid import uuid4
 
 
-class Comment(models.Model):
-    uuid = models.UUIDField(editable=False, default=uuid4)
+class Comment(BaseModel):
     text = models.TextField(max_length=1024)
     article = models.ForeignKey(
         "Article",
@@ -23,8 +22,6 @@ class Comment(models.Model):
         related_name="comments",
     )
     users_liked = models.ManyToManyField(Profile, related_name="comments_liked")
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f"{self.uuid}: {self.article.title} by {self.author.first_name} {self.author.last_name}"

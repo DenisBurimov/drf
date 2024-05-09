@@ -3,7 +3,7 @@
 - Docker
 - PostgreSQL for dev and prod
 - SQLite for testing
-- pytest
+- pytest (don't add .vscode foder to .gitignore)
 - API
 - templates with tailwind CSS
 
