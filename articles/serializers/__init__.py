@@ -3,4 +3,8 @@ from .article import (
     ArticleGetSerializer,
     ArticleUpdateSerializer,
 )
-from .comment import CommentBaseSerializer
+from .comment import (
+    CommentBaseSerializer,
+    CommentGetSerializer,
+    CommentAnswerSerializer,
+)

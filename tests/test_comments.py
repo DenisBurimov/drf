@@ -16,5 +16,5 @@ def test_comment_create(client: APIClient):
     response: Response = client.post(f"/articles/comment/{article.uuid}", comment_data)
     assert response.status_code == 201
     assert response.data["text"] == comment_data["text"]
-    assert response.data["article"] == str(article.uuid)
-    assert response.data["user"] == author.id
+    assert response.data["author"] == author.id
+    assert response.data["article"] == article.id
