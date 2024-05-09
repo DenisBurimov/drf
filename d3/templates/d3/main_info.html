@@ -1,8 +1,12 @@
 {% extends 'd3/base.html' %}
 
 {% block content %}
-<h1>Main Page Testing</h1>
-{% for article in articles %}
-<p>{{ article }}</p>
-{% endfor %}
+<h1 class="bg-blue-700">Main Page Testing</h1>
+<div class="flex justify-center">
+  <div class="w-2/3 bg-blue-200">
+    {% for article in articles %}
+    <p>{{ article }}</p>
+    {% endfor %}
+  </div>
+</div>
 {% endblock %}
