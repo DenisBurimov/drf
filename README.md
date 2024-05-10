@@ -6,6 +6,7 @@
 - pytest (don't add .vscode foder to .gitignore)
 - API
 - templates with tailwind CSS
+- HTMX for rerendering only needed frontend components
 
 ## For running Tailwind server with constant reload:
 

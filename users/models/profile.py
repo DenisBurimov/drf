@@ -8,4 +8,6 @@ class Profile(BaseModel):
     last_name = models.CharField(max_length=32, blank=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     description = models.TextField(max_length=500, blank=True)
-    # articles_liked = models.ManyToManyField("Article", related_name="users_liked")
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"

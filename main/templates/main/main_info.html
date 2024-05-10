@@ -1,12 +1,23 @@
 {% extends 'main/base.html' %}
 
 {% block content %}
-<h1 class="bg-blue-700">Main Page Testing</h1>
 <div class="flex justify-center">
-  <div class="w-2/3 bg-blue-200">
-    {% for article in articles %}
-    <p>{{ article }}</p>
-    {% endfor %}
+  <div>
+    {% with search_args="[name='search'], [name='title'], [name='author'], [name='content']" %}
+    <form class="pb-4 flex justify-between border-b border-white">
+      <input name="search" type="text" class="hidden" value="true">
+      <input name="title" type="text" class="bg-gray-600 rounded-lg" hx-trigger="keyup changed delay:500ms"
+        hx-target="#articles_list" hx-swap="outerHTML" hx-include="{{search_args}}" hx-get="{% url 'info' %}">
+      <input name="author" type="text" class="mx-2 bg-gray-600 rounded-lg" hx-trigger="keyup changed delay:500ms"
+        hx-target="#articles_list" hx-swap="outerHTML" hx-include="{{search_args}}" hx-get="{% url 'info' %}">
+      <input name="content" type="text" class="bg-gray-600 rounded-lg" hx-trigger="keyup changed delay:500ms"
+        hx-target="#articles_list" hx-swap="outerHTML" hx-include="{{search_args}}" hx-get="{% url 'info' %}">
+
+    </form>
+    {% endwith %}
+
+    {% include 'main/article_list.html' %}
+
   </div>
 </div>
 {% endblock %}

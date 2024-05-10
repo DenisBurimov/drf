@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 import random
 from faker import Faker
 from users.models import User, Profile
@@ -28,5 +29,6 @@ def fill_db(users_number: int = TEST_USERS_NUMBER):
             author=profile,
             title=faker.text(max_nb_chars=50),
             content=faker.text(max_nb_chars=500),
+            created_at=datetime.now() - timedelta(days=i),
         )
     print(f"Filled database with {users_number} users.")

@@ -1,0 +1,10 @@
+<div id="articles_list">
+  {% for article in articles %}
+  <div class="py-1 grid grid-cols-4 gap-1 border-b border-white">
+    <!-- for tests: {{ forloop.counter }} -->
+    <div class="col-span-1 p-1">{{ article.title }}</div>
+    <div class="col-span-1 p-1">{{ article.author.first_name }} {{ article.author.last_name }}</div>
+    <div class="col-span-2 p-1">{{ article.content }}</div>
+  </div>
+  {% endfor %}
+</div>
