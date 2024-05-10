@@ -14,7 +14,7 @@ TEST_DESCRIPTION = "Test description"
 
 @pytest.mark.django_db
 def test_get_all_users(client: APIClient):
-    response: Response = client.get("/users/")
+    response: Response = client.get("/api/users/")
     assert response.status_code == 200
     assert len(response.data) == User.objects.count()
     assert UserSerializer(response.data[0])
@@ -26,7 +26,7 @@ def test_get_user(client: APIClient):
 
     assert test_user.phone_number == test_user.phone_number
 
-    response: Response = client.get(f"/users/{test_user.phone_number}")
+    response: Response = client.get(f"/api/users/{test_user.phone_number}")
     assert response.status_code == 200
     assert response.data["phone_number"] == test_user.phone_number
 
@@ -41,7 +41,7 @@ def test_create_user(client: APIClient):
         description=TEST_DESCRIPTION,
     )
 
-    response: Response = client.post("/users/create", user_data, format="json")
+    response: Response = client.post("/api/users/create", user_data, format="json")
     assert response.status_code == 201
 
     new_user = User.objects.get(phone_number=user_data["phone_number"])
@@ -61,7 +61,7 @@ def test_update_user(client: APIClient):
     )
 
     response: Response = client.put(
-        f"/users/update/{test_user.phone_number}",
+        f"/api/users/update/{test_user.phone_number}",
         new_data,
         format="json",
     )

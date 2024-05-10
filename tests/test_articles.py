@@ -8,7 +8,7 @@ from articles.serializers import ArticleBaseSerializer
 
 @pytest.mark.django_db
 def test_get_all_articles(client: APIClient):
-    response: Response = client.get("/articles/")
+    response: Response = client.get("/api/articles/")
     assert response.status_code == 200
     assert len(response.data) == Article.objects.count()
     assert ArticleBaseSerializer(response.data[0])
@@ -17,7 +17,7 @@ def test_get_all_articles(client: APIClient):
 @pytest.mark.django_db
 def test_get_article(client: APIClient):
     article = Article.objects.first()
-    response: Response = client.get(f"/articles/{article.uuid}")
+    response: Response = client.get(f"/api/articles/{article.uuid}")
     assert response.status_code == 200
     assert ArticleBaseSerializer(response.data)
     assert response.data["uuid"] == str(article.uuid)
@@ -33,7 +33,7 @@ def test_create_article(client: APIClient):
         "content": "This is a test article",
         "author": 1,
     }
-    response: Response = client.post("/articles/create", article_data)
+    response: Response = client.post("/api/articles/create", article_data)
     assert response.status_code == 201
     assert Article.objects.filter(uuid=response.data["uuid"]).exists()
     assert response.data["title"] == article_data["title"]
@@ -48,7 +48,9 @@ def test_update_article(client: APIClient):
         "title": "Updated Article",
         "content": "This is an updated article",
     }
-    response: Response = client.put(f"/articles/update/{article.uuid}", article_data)
+    response: Response = client.put(
+        f"/api/articles/update/{article.uuid}", article_data
+    )
     assert response.status_code == 200
     assert response.data["title"] == article_data["title"]
     assert response.data["content"] == article_data["content"]
@@ -67,7 +69,7 @@ def test_update_article(client: APIClient):
         "users_liked": [likers[0].id],
     }
 
-    response: Response = client.put(f"/articles/update/{article.uuid}", likes_data)
+    response: Response = client.put(f"/api/articles/update/{article.uuid}", likes_data)
     assert response.status_code == 200
     assert response.data["users_liked"] == [likers[0].id]
     assert article.users_liked.count() == 1
@@ -75,6 +77,6 @@ def test_update_article(client: APIClient):
     likers_data = {
         "users_liked": [likers[1].id],
     }
-    response: Response = client.put(f"/articles/update/{article.uuid}", likers_data)
+    response: Response = client.put(f"/api/articles/update/{article.uuid}", likers_data)
     assert response.status_code == 200
     assert article.users_liked.count() == 2

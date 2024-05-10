@@ -3,7 +3,7 @@ from django.db.models import Q
 from articles.models import Article
 
 
-def info(request):
+def dashboard(request):
     title = request.GET.get("title")
     author = request.GET.get("author")
     content = request.GET.get("content")

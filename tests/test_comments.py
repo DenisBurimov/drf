@@ -13,7 +13,9 @@ def test_comment_create(client: APIClient):
         "text": "Test Comment",
         "author": author.id,
     }
-    response: Response = client.post(f"/articles/comment/{article.uuid}", comment_data)
+    response: Response = client.post(
+        f"/api/articles/comment/{article.uuid}", comment_data
+    )
     assert response.status_code == 201
     assert response.data["text"] == comment_data["text"]
     assert response.data["author"] == author.id
