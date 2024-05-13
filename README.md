@@ -15,8 +15,7 @@ git clone https://github.com/DenisBurimov/drf.git
 cd drf
 python3.12 -m venv .venv
 source .venv/bin/activate
-pip install poetry
-poetry install
+pip install -r requirements.txt
 ```
 
 ## To fill your database with initial development data:
