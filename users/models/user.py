@@ -14,6 +14,7 @@ class GroupProxy(Group):
 
 class User(BaseModel, AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
+    username = models.CharField(max_length=150, blank=True, null=True)
     phone_number = models.CharField(max_length=15, unique=True)
     email = models.EmailField(max_length=255, blank=True, null=True)
     USERNAME_FIELD = "phone_number"

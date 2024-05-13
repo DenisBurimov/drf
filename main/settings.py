@@ -31,6 +31,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# For Allauth
 SITE_ID = 1
 
 # Application definition
@@ -134,12 +135,23 @@ SOCIALACCOUNT_PROVIDERS = {
         # (``socialaccount`` app) containing the required client
         # credentials, or list them here:
         "APP": {
-            "client_id": "123",
-            "secret": "456",
+            "client_id": env.str("GOOGLE_OAUTH2_CLIENT_ID"),
+            "secret": env.str("GOOGLE_OAUTH2_CLIENT_SECRET"),
             "key": "",
-        }
+        },
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        },
+        'OAUTH_PKCE_ENABLED': True,
     }
 }
+
+LOGIN_REDIRECT_URL = "/"
+ACCOUNT_LOGOUT_REDIRECT = "/"
 
 
 # Internationalization

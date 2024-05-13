@@ -14,6 +14,7 @@ def fill_db(users_number: int = TEST_USERS_NUMBER):
     for i in range(users_number):
         phone_number = f"{random.randint(1000000000, 9999999999)}"
         user = User.objects.create(
+            username=faker.text(max_nb_chars=10),
             phone_number=phone_number,
             password=faker.text(max_nb_chars=5),
         )

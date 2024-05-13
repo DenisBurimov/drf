@@ -6,7 +6,8 @@
 - pytest (don't add .vscode foder to .gitignore)
 - API
 - templates with tailwind CSS
-- HTMX for rerendering only needed frontend components
+- HTMX for rerendering only needed frontend components without a reload
+- Django Allauth with Google login
 
 ## To install this project you can foollow this example:
 
