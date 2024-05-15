@@ -1,6 +1,4 @@
 from main.apps.users.models import User, Profile
-
-# from main.apps.users.serializers import UserSerializer
 from main.logger import log
 
 
