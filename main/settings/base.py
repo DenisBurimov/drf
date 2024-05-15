@@ -93,17 +93,7 @@ WSGI_APPLICATION = "main.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-
-if os.environ.get("APP_ENV") == "testing":
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
-        }
-    }
-else:
-    DATABASES = {"default": env.db("DATABASE_URL", "sqlite:///db.sqlite3")}
-
+DATABASES = {"default": env.db("DATABASE_URL", "sqlite:///db.sqlite3")}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -135,8 +125,10 @@ SOCIALACCOUNT_PROVIDERS = {
         # (``socialaccount`` app) containing the required client
         # credentials, or list them here:
         "APP": {
-            "client_id": env.str("GOOGLE_OAUTH2_CLIENT_ID"),
-            "secret": env.str("GOOGLE_OAUTH2_CLIENT_SECRET"),
+            "client_id": env.str("GOOGLE_OAUTH2_CLIENT_ID", "GOOGLE_OAUTH2_CLIENT_ID"),
+            "secret": env.str(
+                "GOOGLE_OAUTH2_CLIENT_SECRET", "GOOGLE_OAUTH2_CLIENT_SECRET"
+            ),
             "key": "",
         },
         "SCOPE": [
