@@ -1,6 +1,5 @@
 from django.db import models
 from main.apps.users.models import BaseModel, Profile
-from uuid import uuid4
 
 
 class Article(BaseModel):
