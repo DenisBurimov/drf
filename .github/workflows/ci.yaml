@@ -35,3 +35,11 @@ jobs:
 
       - name: Run tests
         run: pytest
+
+      - name: Install coverage
+        run: |
+          pip install coverage
+
+      - name: Fail if coverage is below 80%
+        run: |
+          coverage report --fail-under=80
