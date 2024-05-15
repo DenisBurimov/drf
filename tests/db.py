@@ -1,8 +1,8 @@
 from datetime import datetime, timedelta
 import random
 from faker import Faker
-from users.models import User, Profile
-from articles.models import Article
+from main.apps.users.models import User, Profile
+from main.apps.articles.models import Article
 
 
 faker = Faker()
