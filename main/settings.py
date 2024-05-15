@@ -46,8 +46,8 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     "django_extensions",
     "rest_framework",
-    "users",
-    "articles",
+    "main.apps.users",
+    "main.apps.articles",
     "tailwind",
     "theme",
     "django_browser_reload",
@@ -139,14 +139,14 @@ SOCIALACCOUNT_PROVIDERS = {
             "secret": env.str("GOOGLE_OAUTH2_CLIENT_SECRET"),
             "key": "",
         },
-        'SCOPE': [
-            'profile',
-            'email',
+        "SCOPE": [
+            "profile",
+            "email",
         ],
-        'AUTH_PARAMS': {
-            'access_type': 'online',
+        "AUTH_PARAMS": {
+            "access_type": "online",
         },
-        'OAUTH_PKCE_ENABLED': True,
+        "OAUTH_PKCE_ENABLED": True,
     }
 }
 

@@ -1,12 +1,12 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from articles.models.article import Article
-from articles.serializers import (
+from main.apps.articles.models.article import Article
+from main.apps.articles.serializers import (
     ArticleBaseSerializer,
     ArticleGetSerializer,
     ArticleUpdateSerializer,
 )
-from articles.managers import ArticleManager
+from main.apps.articles.managers import ArticleManager
 from main.logger import log
 
 

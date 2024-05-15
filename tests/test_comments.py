@@ -1,8 +1,8 @@
 import pytest
 from rest_framework.test import APIClient
 from rest_framework.response import Response
-from users.models import Profile
-from articles.models import Article
+from main.apps.users.models import Profile
+from main.apps.articles.models import Article
 
 
 @pytest.mark.django_db

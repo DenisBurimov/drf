@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .models.user import User
 from .serializers import UserSerializer, UserProfileSerializer
-from users.managers.profile import UsersProfilesManager
+from main.apps.users.managers.profile import UsersProfilesManager
 from main.logger import log
 
 

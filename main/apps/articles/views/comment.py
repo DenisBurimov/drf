@@ -1,8 +1,8 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from articles.models.article import Article
-from articles.serializers import CommentBaseSerializer, CommentGetSerializer
-from articles.managers import CommentManager
+from main.apps.articles.models.article import Article
+from main.apps.articles.serializers import CommentBaseSerializer, CommentGetSerializer
+from main.apps.articles.managers import CommentManager
 
 
 comment_manager = CommentManager()

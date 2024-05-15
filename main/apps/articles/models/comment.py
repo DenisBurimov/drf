@@ -1,5 +1,5 @@
 from django.db import models
-from users.models import BaseModel, Profile
+from main.apps.users.models import BaseModel, Profile
 from uuid import uuid4
 
 

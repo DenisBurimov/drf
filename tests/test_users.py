@@ -1,8 +1,8 @@
 import pytest
 from rest_framework.test import APIClient
 from rest_framework.response import Response
-from users.models import User
-from users.serializers import UserSerializer
+from main.apps.users.models import User
+from main.apps.users.serializers import UserSerializer
 
 
 TEST_PHONE_NUMBER = "1234567890"

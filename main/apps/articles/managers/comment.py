@@ -1,5 +1,5 @@
-from articles.models import Article, Comment
-from users.models import Profile
+from main.apps.articles.models import Article, Comment
+from main.apps.users.models import Profile
 from main.logger import log
 
 
