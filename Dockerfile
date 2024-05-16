@@ -8,15 +8,13 @@ RUN apt-get update \
         postgresql-client \
     && rm -rf /var/lib/apt/lists/*
 
-RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
-ENV PATH="$PATH:/root/.poetry/bin"
-
 WORKDIR /code
 
 # Copy only the dependency files to install them
-COPY poetry.lock pyproject.toml /code/
+COPY requirements.txt /code/
 
-RUN poetry config virtualenvs.create false && poetry install --no-interaction --no-ansi
+# Install dependencies
+RUN pip install --upgrade pip && pip install -r /code/requirements.txt
 
 COPY . /code/
 RUN python manage.py collectstatic --noinput
@@ -24,4 +22,4 @@ RUN python manage.py migrate
 EXPOSE 8000
 
 # Define the command to run the application
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "main.wsgi:application"]
+# CMD ["gunicorn", "--bind", "0.0.0.0:8000", "main.wsgi:application"]
