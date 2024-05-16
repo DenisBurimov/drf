@@ -16,7 +16,8 @@ services:
     image: redis:latest
     restart: unless-stopped
     ports:
-      - "6379:6379"
+      - "127.0.0.1:6379:6379"
+    command: redis-server
 
   celery:
     build: .
@@ -33,7 +34,7 @@ services:
       DATABASE_URL: postgresql://${DB_USER:-postgres}:${DB_PASSWD:-secret}@db:5432/${DB_NAME:-db}
       # CELERY_BROKER_URL: redis://redis:6379/0
       # CELERY_RESULT_BACKEND: redis://redis:6379/0
-    command: celery -A config worker -l info
+    command: sh start_celery.sh
 
   api:
     build: .
@@ -50,7 +51,7 @@ services:
       DATABASE_URL: postgresql://${DB_USER:-postgres}:${DB_PASSWD:-secret}@db:5432/${DB_NAME:-db}
     ports:
       - 127.0.0.1:${LOCAL_PORT:-8000}:8000
-    command: gunicorn config.wsgi:application --bind 0.0.0.0:8000
+    command: sh start_web.sh
 
 volumes:
   dbdata:
