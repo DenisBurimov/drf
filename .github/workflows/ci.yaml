@@ -33,12 +33,12 @@ jobs:
         run: |
           ruff check .
 
-      - name: Run tests
-        run: pytest
-
       - name: Install coverage
         run: |
           pip install coverage
+
+      - name: Run tests
+        run: coverage run -m pytest
 
       - name: Fail if coverage is below 80%
         run: |
